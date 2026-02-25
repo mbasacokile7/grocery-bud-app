@@ -1,5 +1,14 @@
+import { useState } from "react";
+import Form from "./Components/Form";
+
 const App = () => {
-  return <h2>Grocery Bud - Starter</h2>;
+  // Items State Variable
+  const [items, setItems] = useState([]);
+  return (
+    <section>
+      <Form />
+    </section>
+  );
 };
 
 export default App;
