@@ -3,6 +3,11 @@ import Form from "./Components/Form";
 import { nanoid } from "nanoid";
 import Items from "./Components/Items";
 
+// Function to locally store items on the list
+function setLocalStorage(items) {
+  localStorage.setItem("grocery-items", JSON.stringify(items));
+}
+
 const App = () => {
   // Items State Variable
   const [items, setItems] = useState([]);
@@ -11,7 +16,11 @@ const App = () => {
   function addItem(itemName) {
     const itemId = nanoid();
     const item = { id: itemId, name: itemName, completed: false };
-    setItems([...items, item]);
+
+    const newItems = [...items, item];
+    setItems(newItems);
+    //Locally Store the items
+    setLocalStorage(newItems);
   }
 
   //Remove Item Function
@@ -21,6 +30,8 @@ const App = () => {
     });
 
     setItems(newItems);
+    // Locally store the returned items: We are over-writing the old items
+    setLocalStorage(newItems);
   }
   return (
     <section className="section-center">
