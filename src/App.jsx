@@ -8,9 +8,24 @@ function setLocalStorage(items) {
   localStorage.setItem("grocery-items", JSON.stringify(items));
 }
 
+// Function to get the locally stored items
+function getLocalStorage() {
+  let groceryItems = localStorage.getItem("grocery-items");
+
+  // Check to see if we have anything stroed locally
+  if (groceryItems) {
+    groceryItems = JSON.parse(localStorage.getItem("grocery-items"));
+  } else {
+    // If nothing is stored locally, we return an empty array
+    groceryItems = [];
+  }
+
+  return groceryItems;
+}
+
 const App = () => {
   // Items State Variable
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(getLocalStorage);
 
   // AddItem Function
   function addItem(itemName) {
